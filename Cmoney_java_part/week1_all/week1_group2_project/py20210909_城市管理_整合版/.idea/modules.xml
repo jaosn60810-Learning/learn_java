@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/py20210909_城市管理_整合版.iml" filepath="$PROJECT_DIR$/.idea/py20210909_城市管理_整合版.iml" />
+      <module fileurl="file://$PROJECT_DIR$/py20210909_城市管理_整合版_v1/py20210909_城市管理_整合版_v1.iml" filepath="$PROJECT_DIR$/py20210909_城市管理_整合版_v1/py20210909_城市管理_整合版_v1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/py20210909_城市管理_整合版_v2/py20210909_城市管理_整合版_v2.iml" filepath="$PROJECT_DIR$/py20210909_城市管理_整合版_v2/py20210909_城市管理_整合版_v2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/py20210910_城市管理_v1/py20210910_城市管理_v1.iml" filepath="$PROJECT_DIR$/py20210910_城市管理_v1/py20210910_城市管理_v1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/py20210910_城市管理_v1_傑/py20210910_城市管理_v1_傑.iml" filepath="$PROJECT_DIR$/py20210910_城市管理_v1_傑/py20210910_城市管理_v1_傑.iml" />
+      <module fileurl="file://$PROJECT_DIR$/py20210910_城市管理_v2_傑/py20210910_城市管理_v2_傑.iml" filepath="$PROJECT_DIR$/py20210910_城市管理_v2_傑/py20210910_城市管理_v2_傑.iml" />
+      <module fileurl="file://$PROJECT_DIR$/py20210910_城市管理_v3_傑/py20210910_城市管理_v3_傑.iml" filepath="$PROJECT_DIR$/py20210910_城市管理_v3_傑/py20210910_城市管理_v3_傑.iml" />
+      <module fileurl="file://$PROJECT_DIR$/py20210910_城市管理_v4_加時間/py20210910_城市管理_v4_加時間.iml" filepath="$PROJECT_DIR$/py20210910_城市管理_v4_加時間/py20210910_城市管理_v4_加時間.iml" />
+      <module fileurl="file://$PROJECT_DIR$/py20210910_城市管理_v5_加時間/py20210910_城市管理_v5_加時間.iml" filepath="$PROJECT_DIR$/py20210910_城市管理_v5_加時間/py20210910_城市管理_v5_加時間.iml" />
+      <module fileurl="file://$PROJECT_DIR$/py20210910_城市管理_v6_建築不會瞬間完成/py20210910_城市管理_v6_建築不會瞬間完成.iml" filepath="$PROJECT_DIR$/py20210910_城市管理_v6_建築不會瞬間完成/py20210910_城市管理_v6_建築不會瞬間完成.iml" />
+      <module fileurl="file://$PROJECT_DIR$/py20210910_城市管理_v7_正確流程main/py20210910_城市管理_v7_正確流程main.iml" filepath="$PROJECT_DIR$/py20210910_城市管理_v7_正確流程main/py20210910_城市管理_v7_正確流程main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/py20210910_城市管理_v8_培v4/py20210910_城市管理_v8_培v4.iml" filepath="$PROJECT_DIR$/py20210910_城市管理_v8_培v4/py20210910_城市管理_v8_培v4.iml" />
+    </modules>
+  </component>
+</project>
