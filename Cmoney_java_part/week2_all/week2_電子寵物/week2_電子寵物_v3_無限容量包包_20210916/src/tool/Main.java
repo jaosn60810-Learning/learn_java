@@ -25,6 +25,11 @@ public class Main {
         System.out.println(b.getBagCount());
         System.out.println();
 
+        b.addItem("Cannedfood",6);
+        System.out.println(Arrays.toString(b.getItems()));
+        System.out.println(b.getBagCount());
+        System.out.println();
+
         b.minusItem("Fishfood",1);
         System.out.println(Arrays.toString(b.getItems()));
         System.out.println(b.getBagCount());
