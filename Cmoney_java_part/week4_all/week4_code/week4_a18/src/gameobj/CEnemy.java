@@ -1,0 +1,37 @@
+package gameobj;
+
+
+import controllers.ImageController;
+import controllers.SceneController;
+import utils.Path;
+
+import java.awt.*;
+
+public class CEnemy extends GameObject {
+
+    private Image img;
+    private int d;
+
+    public CEnemy(int x, int y, int d) {
+        super(x, y, 50, 50);
+        this.d = d;
+        img =  SceneController.instance().irc().tryGetImage(new Path().img().actors().enemy());
+    }
+
+    public boolean move() {
+        translateY(4);
+        translateX(d);
+        return painter().top() <= 600;
+    }
+
+
+    public void paintComponent(Graphics g) {
+        g.drawImage(img, painter().left(), painter().top(),
+                painter().width(), painter().height(), null);
+    }
+
+    @Override
+    public void update() {
+
+    }
+}

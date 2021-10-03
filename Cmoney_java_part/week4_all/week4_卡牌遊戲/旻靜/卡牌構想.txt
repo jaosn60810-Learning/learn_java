@@ -1,0 +1,97 @@
+(玩家)
+牌庫[0~3] //初始只會有一組
+分數
+金幣
+贏的次數
+
+
+(電腦)
+模式(easy、hard)
+牌庫[0~3]  //全部牌組都有
+分數
+贏的次數
+
+
+(Game)
+public class Game {
+牌組[int選擇牌組]new20張
+手牌[隨機5張]
+戰鬥區[]
+棄牌區[]
+runCount=1;
+
+
+while(runCount != 3){
+   判斷這局是誰先出
+   run();
+   if(玩家勝利 == 2 || 電腦勝利==2){
+   結算金幣
+   遊戲結束(離開迴圈)
+   }
+   runCount++;
+}
+
+
+public void run(){
+    new 玩家、電腦
+    int playCount = 0;
+    int computerCount = 0;
+    玩家.手牌[隨機5張]=牌組隨機5張
+    電腦.手牌[隨機5張]=牌組隨機5張
+    
+      while(玩家不出牌 && 電腦不出牌){
+	if(玩家出牌){
+ 	   int playChoose=sc.nextInt();
+           玩家.戰鬥區[playCount]=玩家.手牌[playChoose];
+           buffTime(玩家,電腦)
+	   playCount++;
+	   玩家分數
+           電腦分數
+	   玩家false
+           電腦true
+	 }
+        
+	if(電腦出牌){
+           電腦.戰鬥區[playCount]=電腦.手牌[0]; //一直出第一張
+           buffTime(電腦,玩家)
+	   computerCount++;
+	   玩家分數
+           電腦分數
+           玩家true
+           電腦false
+	  }
+       } 
+     
+   判斷誰贏
+   下一回合(牌組+手牌+戰鬥區+棄牌區變化)
+   牌組[]=剩幾張
+   手牌[]=清空
+   戰鬥區[]=清空
+   棄牌區[]=多少張
+}
+
+
+
+//卡牌效果時間(需要一回合的就2，馬上觸發1，變0就不再觸發)
+public void buffTime(Player player1,Player player2){  //玩家打電腦
+
+    for(int i=0 ; i< 戰鬥區.length ; i++){
+        Card buffCard = player1.戰鬥區[i]; //玩家
+        int buffTime = buffCard.getTime;
+
+        if(buffTime >0){
+	    buffTime--;
+            if(buffTime == 0){
+                buffCard.doBuff(player1,player2)) //玩家發動效果打電腦
+            }else {
+                buffTime--;
+            }
+        }
+    }
+
+}
+
+
+
+
+}
