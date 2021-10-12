@@ -36,6 +36,32 @@ public class Card {
     // 影響回合(一次：1,持續：99999999)
     private int round;
 
+
+//    boolean canEffect(Player p1, Player p2);
+//
+//    void actionOnetime(Player p1, Player p2);
+//
+//    void actionAllTheTime(Player p1, Player p2);
+//
+//
+//    public Card[] getAllCard();
+//
+//    public Card getThisCard();
+//
+//    public String toString();
+//
+//    public Card[] removeCardFromCardSet(Card[] updateCardSet, int position);
+//
+//    public Card[] addToCardSet(Card[] originalCardSet, Card newCard);
+
+
+
+
+
+
+
+
+
     public Card(int cardNumber, String cardName, int cardPoint, String cardeffect, int cardValue, int cardCost, int job, int type,int effectCount) {
         this.number = cardNumber;
         this.name = cardName;

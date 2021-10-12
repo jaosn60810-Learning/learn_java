@@ -14,7 +14,7 @@ public class WareHouse {
                 }
 
                 @Override
-                protected void actionForAll(Player p1, Player p2) {
+                protected void actionForAlL(Player p1, Player p2) {
                     Card card = p1.getCardonDesk()[p1.getCardonDesk().length-1];
                     if (card.getEffectCount() > 0) {
                         p1.addEffects(new Effect() {

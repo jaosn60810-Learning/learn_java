@@ -7,154 +7,156 @@ import java.util.Arrays;
 
 public class WareHouse {
 
-    public ArrayList<Card> setWarrior() {
-        ArrayList<Card> tmp = new ArrayList<>(Arrays.asList(
-                new Card(1, "照顧新人的戰士\t", 1, "自己之後打出的卡片數值 * 2", 5, 2, 1, 1, 1) {
-                    @Override
-                    public boolean canEffect(Player p1, Player p2) {
-                        return true;
+    public Card[] setWarrior() {
+        Card[] tmp = new Card[] {
+            new Card(1, "照顧新人的戰士\t", 1, "自己之後打出的卡片數值 * 2", 5, 2, 1, 1, 1) {
+                @Override
+                public boolean canEffect(Player p1, Player p2) {
+                    return true;
+                }
+
+                @Override
+                protected void actionForAll(Player p1, Player p2) {
+                    Card card = p1.getCardonDesk()[p1.getCardonDesk().length - 1];
+                    if (card.getEffectCount() > 0) {
+                        p1.addEffects(new Effect() {
+
+                            @Override
+                            public void doBuff(Player p1, Player p2) {
+
+                                Card a = p1.getCardonDesk()[p1.getCardonDesk().length - 1];
+                                a.setPoint(a.getPoint() * 2);
+                            }
+                        });
                     }
-                    @Override
-                    protected void actionForAll(Player p1, Player p2) {
-                        Card card = p1.getCardonDesk()[p1.getCardonDesk().length-1];
-                        if (card.getEffectCount() > 0) {
-                            p1.addEffects(new Effect() {
+                }
 
-                                @Override
-                                public void doBuff(Player p1, Player p2) {
-
-                                    Card a = p1.getCardonDesk()[p1.getCardonDesk().length - 1];
-                                    a.setPoint(a.getPoint() * 2);
-                                }
-                            });
+                @Override
+                protected void actionForRemove(Player p1, Player cpu, int index) {
+                    p1.removeEffect(index);
+                }
+            },
+                    new Card(5, "多拿一把劍的戰士\t", 2, "抽一張牌", 5, 2, 1, 3, 1) {
+                        @Override
+                        public boolean canEffect(Player p1, Player p2) {
+                            return p1.getCardSet().length > 0;
                         }
-                    }
-                    @Override
-                    protected void actionForRemove(Player p1, Player cpu, int index) {
-                        p1.removeEffect(index);
-                    }
+
+                        @Override
+                        protected void actionForAll(Player p1, Player p2) {
+                            Card card = p1.getCardonDesk()[p1.getCardonDesk().length - 1];
+                            if (card.getEffectCount() > 0) {
+                                p1.setHandCard(addToCardSet(p1.getHandCard(), Card.copy(p1.getCardSet()[0])));
+                                p1.setCardSet(removeCardFromCardSet(p1.getCardSet(), 0));
+
+                            }
+
+                        }
                     },
-                new Card(5, "多拿一把劍的戰士\t", 2, "抽一張牌", 5, 2, 1, 3, 1) {
-                    @Override
-                    public boolean canEffect(Player p1, Player p2) {
-                        return p1.getCardSet().length > 0;
-                    }
-
-                    @Override
-                    protected void actionForAll(Player p1, Player p2) {
-                        Card card = p1.getCardonDesk()[p1.getCardonDesk().length-1];
-                        if (card.getEffectCount() > 0) {
-                            p1.setHandCard(addToCardSet(p1.getHandCard(), Card.copy(p1.getCardSet()[0])));
-                            p1.setCardSet(removeCardFromCardSet(p1.getCardSet(), 0));
-
-                        }
-
-                    }
-                },
-                new Card(9, "遇強則強的戰士\t", 3, "目前分數若是低於對手，則抽一張牌", 5, 2, 1, 3, 1) {
-                    @Override
-                    public boolean canEffect(Player p1, Player p2) {
-                        int sump1 = 0, sump2 = 0;
-                        for (int i = 0; i < p1.getCardonDesk().length; i++) {
-                            sump1 += p1.getCardonDesk()[i].getPoint();
-                        }
-                        for (int i = 0; i < p2.getCardonDesk().length; i++) {
-                            sump2 += p2.getCardonDesk()[i].getPoint();
-                        }
-                        return sump1 < sump2;
-                    }
-
-                    @Override
-                    protected void actionForAll(Player p1, Player p2) {
-                        Card card = p1.getCardonDesk()[p1.getCardonDesk().length-1];
-                        if (card.getEffectCount() > 0) {
-                            p1.setHandCard(addToCardSet(p1.getHandCard(), Card.copy(p1.getCardSet()[0])));
-                            p1.setCardSet(removeCardFromCardSet(p1.getCardSet(), 0));
-                        }
-                    }
-                },
-                new Card(13, "針對人的戰士\t\t", 4, "對手戰鬥區中數值介於 3 ~ 6 之間的卡片數值 - 2", 5, 2, 1, 2, 1) {
-                    @Override
-                    public boolean canEffect(Player p1, Player p2) {
-                        return true;
-                    }
-
-                    @Override
-                    protected void actionForAll(Player p1, Player p2) {
-                        Card card = p1.getCardonDesk()[p1.getCardonDesk().length-1];
-                        if (card.getEffectCount() > 0) {
+                    new Card(9, "遇強則強的戰士\t", 3, "目前分數若是低於對手，則抽一張牌", 5, 2, 1, 3, 1) {
+                        @Override
+                        public boolean canEffect(Player p1, Player p2) {
+                            int sump1 = 0, sump2 = 0;
+                            for (int i = 0; i < p1.getCardonDesk().length; i++) {
+                                sump1 += p1.getCardonDesk()[i].getPoint();
+                            }
                             for (int i = 0; i < p2.getCardonDesk().length; i++) {
-                                if (p2.getCardonDesk()[i].getPoint() >= 3 && p2.getCardonDesk()[i].getPoint() <= 6) {
-                                    p2.getCardonDesk()[i].setPoint(p2.getCardonDesk()[i].getPoint() - 2);
+                                sump2 += p2.getCardonDesk()[i].getPoint();
+                            }
+                            return sump1 < sump2;
+                        }
+
+                        @Override
+                        protected void actionForAll(Player p1, Player p2) {
+                            Card card = p1.getCardonDesk()[p1.getCardonDesk().length - 1];
+                            if (card.getEffectCount() > 0) {
+                                p1.setHandCard(addToCardSet(p1.getHandCard(), Card.copy(p1.getCardSet()[0])));
+                                p1.setCardSet(removeCardFromCardSet(p1.getCardSet(), 0));
+                            }
+                        }
+                    },
+                    new Card(13, "針對人的戰士\t\t", 4, "對手戰鬥區中數值介於 3 ~ 6 之間的卡片數值 - 2", 5, 2, 1, 2, 1) {
+                        @Override
+                        public boolean canEffect(Player p1, Player p2) {
+                            return true;
+                        }
+
+                        @Override
+                        protected void actionForAll(Player p1, Player p2) {
+                            Card card = p1.getCardonDesk()[p1.getCardonDesk().length - 1];
+                            if (card.getEffectCount() > 0) {
+                                for (int i = 0; i < p2.getCardonDesk().length; i++) {
+                                    if (p2.getCardonDesk()[i].getPoint() >= 3 && p2.getCardonDesk()[i].getPoint() <= 6) {
+                                        p2.getCardonDesk()[i].setPoint(p2.getCardonDesk()[i].getPoint() - 2);
+                                    }
+                                }
+
+                            }
+
+                        }
+                    },
+                    new Card(13, "針對人的戰士\t\t", 4, "對手戰鬥區中數值介於 3 ~ 6 之間的卡片數值 - 2", 5, 2, 1, 2, 1) {
+                        @Override
+                        public boolean canEffect(Player p1, Player p2) {
+                            return true;
+                        }
+
+                        @Override
+                        protected void actionForAll(Player p1, Player p2) {
+                            Card card = p1.getCardonDesk()[p1.getCardonDesk().length - 1];
+                            if (card.getEffectCount() > 0) {
+                                for (int i = 0; i < p2.getCardonDesk().length; i++) {
+                                    if (p2.getCardonDesk()[i].getPoint() >= 3 && p2.getCardonDesk()[i].getPoint() <= 6) {
+                                        p2.getCardonDesk()[i].setPoint(p2.getCardonDesk()[i].getPoint() - 2);
+                                    }
                                 }
                             }
 
                         }
+                    },
+                    new Card(21, "你手牌多就扣你的戰士", 6, "對手手牌大於等於 4 張時，對手戰鬥區中隨機一張牌數值減少 2", 5, 2, 1, 2, 1) {
+                        @Override
+                        public boolean canEffect(Player p1, Player p2) {
+                            return p2.getHandCard().length >= 4 && p2.getCardonDesk().length > 0;
+                        }
 
-                    }
-                },
-                new Card(13, "針對人的戰士\t\t", 4, "對手戰鬥區中數值介於 3 ~ 6 之間的卡片數值 - 2", 5, 2, 1, 2, 1) {
-                    @Override
-                    public boolean canEffect(Player p1, Player p2) {
-                        return true;
-                    }
+                        @Override
+                        protected void actionForAll(Player p1, Player p2) {
+                            Card card = p1.getCardonDesk()[p1.getCardonDesk().length - 1];
+                            if (card.getEffectCount() > 0) {
+                                int r = random(0, p2.getCardonDesk().length - 1);
+                                Card tmp = p2.getCardonDesk()[r];
+                                tmp.setPoint(tmp.getPoint() - 2);
 
-                    @Override
-                    protected void actionForAll(Player p1, Player p2) {
-                        Card card = p1.getCardonDesk()[p1.getCardonDesk().length-1];
-                        if (card.getEffectCount() > 0) {
-                            for (int i = 0; i < p2.getCardonDesk().length; i++) {
-                                if (p2.getCardonDesk()[i].getPoint() >= 3 && p2.getCardonDesk()[i].getPoint() <= 6) {
-                                    p2.getCardonDesk()[i].setPoint(p2.getCardonDesk()[i].getPoint() - 2);
-                                }
                             }
-                        }
-
-                    }
-                },
-                new Card(21, "你手牌多就扣你的戰士", 6, "對手手牌大於等於 4 張時，對手戰鬥區中隨機一張牌數值減少 2", 5, 2, 1, 2, 1) {
-                    @Override
-                    public boolean canEffect(Player p1, Player p2) {
-                        return p2.getHandCard().length >= 4 && p2.getCardonDesk().length > 0;
-                    }
-
-                    @Override
-                    protected void actionForAll(Player p1, Player p2) {
-                        Card card = p1.getCardonDesk()[p1.getCardonDesk().length-1];
-                        if (card.getEffectCount() > 0) {
-                            int r = random(0, p2.getCardonDesk().length - 1);
-                            Card tmp = p2.getCardonDesk()[r];
-                            tmp.setPoint(tmp.getPoint() - 2);
 
                         }
+                    },
+                    new Card(25, "路過的鬍渣戰士\t", 7, "無特殊效果", 5, 2, 1, 4, 1)
+                    , new Card(29, "路過的超強戰士\t", 8, "無特殊效果", 5, 2, 1, 4, 1)
+                    , new Card(33, "君子復仇十年不晚的戰士", 9, "打出此卡時，若是自己棄牌區的卡片數量超過 10 張，則對手隨機一張卡片數值 - 5", 5, 2, 1, 2, 1) {
+                @Override
+                public boolean canEffect(Player p1, Player p2) {
+
+                    return p1.getCardOut().length > 10;
+                }
+
+                @Override
+                protected void actionForAll(Player p1, Player p2) {
+                    Card card = p1.getCardonDesk()[p1.getCardonDesk().length - 1];
+                    if (card.getEffectCount() > 0) {
+                        int position = p2.getCardonDesk().length - 1;
+                        int index = random(0, position);
+
+                        p2.getCardonDesk()[index].setPoint(p2.getCardonDesk()[index].getPoint() - 5);
+
 
                     }
-                },
-                new Card(25, "路過的鬍渣戰士\t", 7, "無特殊效果", 5, 2, 1, 4, 1)
-                ,new Card(29, "路過的超強戰士\t", 8, "無特殊效果", 5, 2, 1, 4, 1)
-                ,new Card(33, "君子復仇十年不晚的戰士", 9, "打出此卡時，若是自己棄牌區的卡片數量超過 10 張，則對手隨機一張卡片數值 - 5", 5, 2, 1, 2, 1) {
-                    @Override
-                    public boolean canEffect(Player p1, Player p2) {
 
-                        return p1.getCardOut().length > 10;
-                    }
-
-                    @Override
-                    protected void actionForAll(Player p1, Player p2) {
-                        Card card = p1.getCardonDesk()[p1.getCardonDesk().length-1];
-                        if (card.getEffectCount() > 0) {
-                            int position = p2.getCardonDesk().length - 1;
-                            int index = random(0, position);
-
-                            p2.getCardonDesk()[index].setPoint(p2.getCardonDesk()[index].getPoint() - 5);
-
-
-                        }
-
-                    }
-                },
-                new Card(37, "路過的戰士之王\t", 10, "無特殊效果", 5, 2, 1, 4, 1)
-        ));
+                }
+            },
+                    new Card(37, "路過的戰士之王\t", 10, "無特殊效果", 5, 2, 1, 4, 1)
+        };
                 return tmp;
     };
 
